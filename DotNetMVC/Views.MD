@@ -1,0 +1,1 @@
+To add a view simply add a controller if not existing  to the controllers directory. Create an action and a view with the same name.
