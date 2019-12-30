@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ASPNETMVC_Data_Models.Models
 {
-    public class Employee
+    public class Employee 
     {
         public int ID { get; set; }
         public string Name { get; set; }
