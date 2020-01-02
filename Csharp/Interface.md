@@ -1,4 +1,4 @@
-An interface acts as a contract by declaring what can only be implemented by a class or struct. You cannot have access modifiers in an inteface nor implement a methos within one.
+An interface acts as a contract by declaring what can only be implemented by a class or struct. You cannot have access modifiers in an inteface nor implement a methods within one.
 
 
 ```c#

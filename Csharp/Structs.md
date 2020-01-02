@@ -44,7 +44,7 @@ Console.Write(emp.EmpId); // prints 1
 ```
 ##
 
-A struct cannot have an unparameterized constructor. You cna dexlare a parameterised one to initialize members:
+A struct cannot have an unparameterized constructor. You cna declare a parameterised one to initialize members:
 
 ```c#
 struct Employee 

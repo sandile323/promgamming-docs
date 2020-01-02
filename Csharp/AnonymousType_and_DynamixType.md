@@ -10,11 +10,11 @@ Properties of anonymous types will be read-only properties so you cannot change 
 
 ## Nested Anonymous Type
 
-An anonymous type can have another in it:
+An anonymous type can have another anonymous type in it:
 
 ```c#
 
-var anontype = new { prop1 = "1st prop", prop2 = "2nd prop", prop3 = true}
+var anontype = new { prop1 = "1st prop", prop2 = "2nd prop", prop3 = new { prop1 = "1st prop", prop2 = "2nd prop", prop3 = true}}
 
 ```
 
@@ -71,11 +71,11 @@ class Program
 }
 ```
 
-In this example the anonymous type saves memory throughh the slect by creating a dynmic object which has properties of concenr and not all properties.
+In this example the anonymous type saves memory through the select by creating a dynmic object which has properties of concenr and not all properties.
 
 # Dynamic Type
 
-Type chekcing for dynamic types is resloved at run time rather than compile time in the case of var.
+Type checking for dynamic types is resloved at run time rather than compile time.
 
 example: 
 
@@ -100,7 +100,7 @@ static void Main(string[] args)
     Console.WriteLine(dynamicVariable.GetType().ToString());
 }// Outputs: System.Int32 
 ```
-a dynamic type value can be change into any data type an this will be resolved at runtime.
+a dynamic type value can be change into any data type and this will be resolved at runtime.
 
 If you assign a class object to a dynamic type than compile time wont check if an invoked method exists in the class. This will throw a runtime error instead.
 
@@ -133,5 +133,5 @@ class Program
 }
 
 ```
-A methods can have a dynmic parameter so as to accept any type
+A method can have a dynmic parameter, so as to accept any type.
 
