@@ -125,11 +125,11 @@ static void Main(string[] args)
 
 ```
 
-### Disctionary<TKey, TValue>
+### Dictionary<TKey, TValue>
 
-is a generic colleciton class, TKEEY deoted the type of key, and type value the value type.
+is a generic colleciton class, TKey deoted the type of key, and type value the value type.
 
-A disctionary objecy can be assigned to a variable of IDictionary<TKey, TValue> or Dictionary<TKey, TValue>
+A dictionary object can be assigned to a variable of IDictionary<TKey, TValue> or Dictionary<TKey, TValue>
 
 ```c#
 IDictionary<int, string> dict = new Dictionary<int, string>();
@@ -204,5 +204,102 @@ if(dict.TryGetValue(4, out result))
 else {
     //sorry not fuond code
 }
+```
+#### Check for Existing Elements
 
-#### Check for an Existing Elements
+Use `ContainsKey()` to check whether a key exists in dictionary, use `Contains()` to check if a key value pair exists in a dictionary.
+
+```c#
+
+dict.ContainsKey(1); // returns true
+dict.ContainsKey(4); // returns false
+
+dict.Contains(new KeyValuePair<int,string>(1,"One")); // returns true
+
+```
+
+You can also pass a IEqualityComparer as a second parameter to the `Contains()` function. You can do so to customize the equality comparison:
+
+```c#
+
+public class Student
+{
+    public int StudentID { get; set; }
+    public string StudentName { get; set; }
+}
+
+class StudentDictionaryComparer : IEqualityComparer<KeyValuePair<int,Student>>
+{
+    public bool Equals(KeyValuePair<int, Student> x, KeyValuePair<int, Student> y)
+    {
+        if (x.Key == y.Key && (x.Value.StudentID == y.Value.StudentID) && (x.Value.StudentName == y.Value.StudentName))
+            return true;
+
+        return false;
+    }
+
+    public int GetHashCode(KeyValuePair<int, Student> obj)
+    {
+        return obj.Key.GetHashCode();
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        IDictionary<int, Student> studentDict = new Dictionary<int, Student>()
+                    {
+                        { 1, new Student(){ StudentID =1, StudentName = "Bill"}},
+                        { 2, new Student(){ StudentID =2, StudentName = "Steve"}},
+                        { 3, new Student(){ StudentID =3, StudentName = "Ram"}}
+                    };
+
+        Student std = new Student(){ StudentID = 1, StudentName = "Bill"};
+
+        KeyValuePair<int, Student> elementToFind = new KeyValuePair<int, Student>(1, std);
+
+        bool result = studentDict.Contains(elementToFind, new StudentDictionaryComparer()); // returns true
+    
+        Console.WriteLine(result);
+    }
+```
+
+#### Remove from Dictionary:
+
+You can use Remove() or RemoveAt() to remove an element from a dictionary. 
+
+```c#
+dict.Remove(new KeyValuePair<int, string>(2, "Two1")); 
+dict.Remove(1); // removes the item which has 1 as a key
+```
+
+### SortedList<TKey, TValue>
+
+C# has a non generic and generic sorted list. The generic SortedList store key value pare items sorted by IComparer<T> association. Non-generic does not specify types for key and value. SoortedList maintains two object [] arrays for vlue and key respectively.
+When you add or remove it does a binary search and rearranges to find the matching index to insert or remove an item.
+
+#### Instantiate a SortedList object
+
+```c#
+SortedList<int, string> mySortedList = new SortedList<int,string>();
+```
+
+#### Adding to SortedList
+
+You can use the add method to add items to a SortedList
+
+```c#
+SortedList<int,string> sortedList1 = new SortedList<int,string>();
+sortedList1.Add(3, "Three");
+sortedList1.Add(4, "Four");
+sortedList1.Add(1, "One");
+sortedList1.Add(5, "Five");
+sortedList1.Add(2, "Two");
+
+```
+
+SortList sorts everytime you add elements to it.
+
+
+
