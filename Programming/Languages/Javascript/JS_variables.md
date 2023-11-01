@@ -27,4 +27,17 @@ In web pages, the global object is window, so you can set and access global vari
 
 Consequently, you can access global variables declared in one window or frame from another window or frame by specifying the window or frame name. For example, if a variable called phoneNumber is declared in a document, you can refer to this variable from an iframe as parent.phoneNumber.
 
-Constants
+### Constants
+
+However, const only prevents re-assignments, but doesn't prevent mutations. The properties of objects assigned to constants are not protected, so the following statement is executed without problems.
+
+For example: 
+
+```js
+
+const MY_OBJECT = { key: "value" };
+MY_OBJECT.key = "otherValue";
+
+```
+
+
