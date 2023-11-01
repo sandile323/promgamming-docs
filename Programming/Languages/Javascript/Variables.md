@@ -40,7 +40,7 @@ MY_OBJECT.key = "otherValue";
 
 ```
 
-Numbers and the '+' operator
+### Numbers and the '+' operator
 In expressions involving numeric and string values with the + operator, JavaScript converts numeric values to strings. For example, consider the following statements:
 
 ```js
