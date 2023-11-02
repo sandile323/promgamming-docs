@@ -1,0 +1,15 @@
+### Function hoisting
+Consider the example below:
+
+```js
+
+console.log(square(5)); // 25
+
+function square(n) {
+  return n * n;
+}
+
+```
+
+This code runs without any error, despite the square() function being called before it's declared. This is because the JavaScript interpreter hoists the entire function declaration to the top of the current scope, so the code above is equivalent to:
+
