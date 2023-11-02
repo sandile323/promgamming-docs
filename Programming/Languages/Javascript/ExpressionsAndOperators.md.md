@@ -62,3 +62,12 @@ const mycar = { make: "Honda", model: "Accord", year: 1998 };
 "model" in mycar; // returns true
 
 ```
+
+### Super operator
+
+The `super` keyword is used to call functions on an object's parent. It is useful with classes to call the parent constructor, for example.
+
+```js
+super(args); // calls the parent constructor.
+super.functionOnParent(args);
+```
