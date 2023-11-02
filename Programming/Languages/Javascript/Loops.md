@@ -81,3 +81,25 @@ while (i < 5) {
 
 ```
 If you comment out the continue;, the loop would run till the end and you would see 1,3,6,10,15.
+
+## For...in vs For...of
+
+The following example shows the difference between a for...of loop and a for...in loop. While for...in iterates over property names, for...of iterates over property values:
+
+```js
+
+const arr = [3, 5, 7];
+arr.foo = "hello";
+
+for (const i in arr) {
+  console.log(i);
+}
+// "0" "1" "2" "foo"
+
+for (const i of arr) {
+  console.log(i);
+}
+// Logs: 3 5 7
+
+```
+
