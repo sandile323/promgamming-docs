@@ -84,3 +84,57 @@ console.log(fnInside(5)); // 8
 console.log(outside(3)(5)); // 8
 
 ```
+
+### Multiply-nested functions
+Functions can be multiply-nested. For example:
+
+A function (A) contains a function (B), which itself contains a function (C).
+Both functions B and C form closures here. So, B can access A, and C can access B.
+In addition, since C can access B which can access A, C can also access A.
+Thus, the closures can contain multiple scopes; they recursively contain the scope of the functions containing it. This is called scope chaining. (The reason it is called "chaining" is explained later.)
+
+Consider the following example:
+
+```js
+
+function A(x) {
+  function B(y) {
+    function C(z) {
+      console.log(x + y + z);
+    }
+    C(3);
+  }
+  B(2);
+}
+A(1); // Logs 6 (which is 1 + 2 + 3)
+
+```
+In this example, C accesses B's y and A's x.
+
+This can be done because:
+
+B forms a closure including A (i.e., B can access A's arguments and variables).
+C forms a closure including B.
+Because C's closure includes B and B's closure includes A, then C's closure also includes A. This means C can access both B and A's arguments and variables. In other words, C chains the scopes of B and A, in that order.
+The reverse, however, is not true. A cannot access C, because A cannot access any argument or variable of B, which C is a variable of. Thus, C remains private to only B.
+
+### Name conflicts
+When two arguments or variables in the scopes of a closure have the same name, there is a name conflict. More nested scopes take precedence. So, the innermost scope takes the highest precedence, while the outermost scope takes the lowest. This is the scope chain. The first on the chain is the innermost scope, and the last is the outermost scope. Consider the following:
+
+```js
+
+function outside() {
+  const x = 5;
+  function inside(x) {
+    return x * 2;
+  }
+  return inside;
+}
+
+console.log(outside()(10)); // 20 (instead of 10)
+
+```
+
+The name conflict happens at the statement return x * 2 and is between inside's parameter x and outside's variable x. The scope chain here is {inside, outside, global object}. Therefore, inside's x takes precedences over outside's x, and 20 (inside's x) is returned instead of 10 (outside's x).
+
+
