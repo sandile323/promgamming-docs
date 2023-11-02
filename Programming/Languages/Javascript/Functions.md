@@ -135,6 +135,110 @@ console.log(outside()(10)); // 20 (instead of 10)
 
 ```
 
+
+
 The name conflict happens at the statement return x * 2 and is between inside's parameter x and outside's variable x. The scope chain here is {inside, outside, global object}. Therefore, inside's x takes precedences over outside's x, and 20 (inside's x) is returned instead of 10 (outside's x).
+
+### Closures
+Closures are one of the most powerful features of JavaScript. JavaScript allows for the nesting of functions and grants the inner function full access to all the variables and functions defined inside the outer function (and all other variables and functions that the outer function has access to).
+
+However, the outer function does not have access to the variables and functions defined inside the inner function. This provides a sort of encapsulation for the variables of the inner function.
+
+Also, since the inner function has access to the scope of the outer function, the variables and functions defined in the outer function will live longer than the duration of the outer function execution, if the inner function manages to survive beyond the life of the outer function. A closure is created when the inner function is somehow made available to any scope outside the outer function.
+
+```js
+
+// The outer function defines a variable called "name"
+const pet = function (name) {
+  const getName = function () {
+    // The inner function has access to the "name" variable of the outer function
+    return name;
+  };
+  return getName; // Return the inner function, thereby exposing it to outer scopes
+};
+const myPet = pet("Vivie");
+
+console.log(myPet()); // "Vivie"
+
+```
+
+It can be much more complex than the code above. An object containing methods for manipulating the inner variables of the outer function can be returned.
+
+```js
+
+const createPet = function (name) {
+  let sex;
+
+  const pet = {
+    // setName(newName) is equivalent to setName: function (newName)
+    // in this context
+    setName(newName) {
+      name = newName;
+    },
+
+    getName() {
+      return name;
+    },
+
+    getSex() {
+      return sex;
+    },
+
+    setSex(newSex) {
+      if (
+        typeof newSex === "string" &&
+        (newSex.toLowerCase() === "male" || newSex.toLowerCase() === "female")
+      ) {
+        sex = newSex;
+      }
+    },
+  };
+
+  return pet;
+};
+
+const pet = createPet("Vivie");
+console.log(pet.getName()); // Vivie
+
+pet.setName("Oliver");
+pet.setSex("male");
+console.log(pet.getSex()); // male
+console.log(pet.getName()); // Oliver
+
+```
+
+In the code above, the name variable of the outer function is accessible to the inner functions, and there is no other way to access the inner variables except through the inner functions. The inner variables of the inner functions act as safe stores for the outer arguments and variables. They hold "persistent" and "encapsulated" data for the inner functions to work with. The functions do not even have to be assigned to a variable, or have a name.
+
+```js
+
+const getCode = (function () {
+  const apiCode = "0]Eal(eh&2"; // A code we do not want outsiders to be able to modify…
+
+  return function () {
+    return apiCode;
+  };
+})();
+
+console.log(getCode()); // "0]Eal(eh&2"
+
+```
+
+Note: There are a number of pitfalls to watch out for when using closures!
+
+If an enclosed function defines a variable with the same name as a variable in the outer scope, then there is no way to refer to the variable in the outer scope again. (The inner scope variable "overrides" the outer one, until the program exits the inner scope. It can be thought of as a name conflict.)
+
+```js
+
+const createPet = function (name) {
+  // The outer function defines a variable called "name".
+  return {
+    setName(name) {
+      // The enclosed function also defines a variable called "name".
+      name = name; // How do we access the "name" defined by the outer function?
+    },
+  };
+};
+
+```
 
 
