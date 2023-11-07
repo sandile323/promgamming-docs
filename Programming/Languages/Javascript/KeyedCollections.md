@@ -97,7 +97,9 @@ Deleting Array elements by value (arr.splice(arr.indexOf(val), 1)) is very slow.
 Set objects let you delete elements by their value. With an array, you would have to splice based on an element's index.
 The value NaN cannot be found with indexOf in an array.
 Set objects store unique values. You don't have to manually keep track of duplicates.
-WeakSet object
+
+### WeakSet object
+
 WeakSet objects are collections of garbage-collectable values, including objects and non-registered symbols. A value in the WeakSet may only occur once. It is unique in the WeakSet's collection.
 
 The main differences to the Set object are:
@@ -107,7 +109,12 @@ The WeakSet is weak: References to objects in the collection are held weakly. If
 WeakSets are not enumerable.
 The use cases of WeakSet objects are limited. They will not leak memory, so it can be safe to use DOM elements as a key and mark them for tracking purposes, for example.
 
-Key and value equality of Map and Set
+### Key and value equality of Map and Set
 
+Both the key equality of Map objects and the value equality of Set objects are based on the SameValueZero algorithm:
+
+Equality works like the identity comparison operator ===.
+-0 and +0 are considered equal.
+NaN is considered equal to itself (contrary to ===).
 
 
