@@ -54,4 +54,60 @@ One use case of WeakMap objects is to store private data for an object, or to hi
 For more visit [this page](https://fitzgeraldnick.com/2014/01/13/hiding-implementation-details-with-e6-weakmaps.html)  
 
 
+### Set object
+Set objects are collections of unique values. You can iterate its elements in insertion order. A value in a Set may only occur once; it is unique in the Set's collection.
+
+The following code shows some basic operations with a Set. See also the Set reference page for more examples and the complete API.
+
+```js
+const mySet = new Set();
+mySet.add(1);
+mySet.add("some text");
+mySet.add("foo");
+
+mySet.has(1); // true
+mySet.delete("foo");
+mySet.size; // 2
+
+for (const item of mySet) {
+  console.log(item);
+}
+// 1
+// "some text"
+
+```
+
+### Converting between Array and Set
+You can create an Array from a Set using Array.from or the spread syntax. Also, the Set constructor accepts an Array to convert in the other direction.
+
+Note: Set objects store unique values—so any duplicate elements from an Array are deleted when converting!
+
+```js
+
+Array.from(mySet);
+[...mySet2];
+
+mySet2 = new Set([1, 2, 3, 4]);
+
+```
+### Array and Set compared
+Traditionally, a set of elements has been stored in arrays in JavaScript in a lot of situations. The Set object, however, has some advantages:
+
+Deleting Array elements by value (arr.splice(arr.indexOf(val), 1)) is very slow.
+Set objects let you delete elements by their value. With an array, you would have to splice based on an element's index.
+The value NaN cannot be found with indexOf in an array.
+Set objects store unique values. You don't have to manually keep track of duplicates.
+WeakSet object
+WeakSet objects are collections of garbage-collectable values, including objects and non-registered symbols. A value in the WeakSet may only occur once. It is unique in the WeakSet's collection.
+
+The main differences to the Set object are:
+
+In contrast to Sets, WeakSets are collections of objects or symbols only, and not of arbitrary values of any type.
+The WeakSet is weak: References to objects in the collection are held weakly. If there is no other reference to an object stored in the WeakSet, they can be garbage collected. That also means that there is no list of current objects stored in the collection.
+WeakSets are not enumerable.
+The use cases of WeakSet objects are limited. They will not leak memory, so it can be safe to use DOM elements as a key and mark them for tracking purposes, for example.
+
+Key and value equality of Map and Set
+
+
 
