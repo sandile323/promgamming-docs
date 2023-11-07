@@ -29,7 +29,7 @@ sayings.size; // 0
 
 ```
 
-###vObject and Map compared
+### Object and Map compared
 Traditionally, objects have been used to map strings to values. Objects allow you to set keys to values, retrieve those values, delete keys, and detect whether something is stored at a key. Map objects, however, have a few more advantages that make them better maps.
 
 The keys of an Object are strings or symbols, where they can be of any value for a Map.
