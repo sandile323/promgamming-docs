@@ -106,3 +106,74 @@ console.log(red === anotherRed); // false
 Within a class constructor, the value of this points to the newly created instance. You can assign properties to it, or read existing properties (especially methods — which we will cover next).
 
 The this value will be automatically returned as the result of new. You are advised to not return any value from the constructor — because if you return a non-primitive value, it will become the value of the new expression, and the value of this is dropped. (You can read more about what new does in its description.)
+
+
+### Private Fields
+Private fields in JavaScript are hard private: if the class does not implement methods that expose these private fields, there's absolutely no mechanism to retrieve them from outside the class. This means you are safe to do any refactors to your class's private fields, as long as the behavior of exposed methods stay the same.
+
+After we've made the values field private, we can add some more logic in the getRed and setRed methods, instead of making them simple pass-through methods. For example, we can add a check in setRed to see if it's a valid R value:
+
+```js
+
+class Color {
+  #values;
+  constructor(r, g, b) {
+    this.#values = [r, g, b];
+  }
+  getRed() {
+    return this.#values[0];
+  }
+  setRed(value) {
+    if (value < 0 || value > 255) {
+      throw new RangeError("Invalid R value");
+    }
+    this.#values[0] = value;
+  }
+}
+
+const red = new Color(255, 0, 0);
+red.setRed(1000); // RangeError: Invalid R value
+
+```
+
+If we leave the values property exposed, our users can easily circumvent that check by assigning to values[0] directly, and create invalid colors. But with a well-encapsulated API, we can make our code more robust and prevent logic errors downstream.
+
+A class method can read the private fields of other instances, as long as they belong to the same class.
+
+
+```js
+
+class Color {
+  #values;
+  constructor(r, g, b) {
+    this.#values = [r, g, b];
+  }
+  redDifference(anotherColor) {
+    // #values doesn't necessarily need to be accessed from this:
+    // you can access private fields of other instances belonging
+    // to the same class.
+    return this.#values[0] - anotherColor.#values[0];
+  }
+}
+
+const red = new Color(255, 0, 0);
+const crimson = new Color(220, 20, 60);
+red.redDifference(crimson); // 35
+
+```
+
+<mark>Nice to know:</mark>
+If you don't know if a private field exists on an object and you wish to access it without using try/catch to handle the error, you can use the in operator.
+
+class Color {
+  #values;
+  constructor(r, g, b) {
+    this.#values = [r, g, b];
+  }
+  redDifference(anotherColor) {
+    if (!(#values in anotherColor)) {
+      throw new TypeError("Color instance expected");
+    }
+    return this.#values[0] - anotherColor.#values[0];
+  }
+}
