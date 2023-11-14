@@ -162,7 +162,7 @@ red.redDifference(crimson); // 35
 
 ```
 
-<mark>Nice to know:</mark>
+<mark style="background-color: grey">Nice to know:</mark>
 If you don't know if a private field exists on an object and you wish to access it without using try/catch to handle the error, you can use the in operator.
 
 class Color {
