@@ -162,9 +162,10 @@ red.redDifference(crimson); // 35
 
 ```
 
-<mark style="background-color: grey">Nice to know:</mark>
+***Nice to know:
 If you don't know if a private field exists on an object and you wish to access it without using try/catch to handle the error, you can use the in operator.
 
+```js
 class Color {
   #values;
   constructor(r, g, b) {
@@ -177,3 +178,5 @@ class Color {
     return this.#values[0] - anotherColor.#values[0];
   }
 }
+
+```
