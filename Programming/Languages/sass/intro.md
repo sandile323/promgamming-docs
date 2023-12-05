@@ -161,4 +161,39 @@ body {
   color: red;
 }
 
-``
+```
+
+### @mixin & @include
+
+The `@mxin` directive lets you create csss code to be reused throughout the site. The `@include` directive iw created to let you use the mixin
+
+#### Defining a mixin
+
+Sass @mixin syntax: 
+
+`
+@mixin name {
+  property: value,
+`
+
+The following example creates a mixin named "important-text":
+
+```scss
+@mixin important-text {
+  color: red;
+  font-size: 25px;
+  font-weight: bold;
+  border: 1px solid blue;
+}
+
+```
+
+#### Using a mixin
+
+The `@include` directive is used to include a mixin: 
+
+```scss
+selector {
+  @include: mixin-name
+}
+```
