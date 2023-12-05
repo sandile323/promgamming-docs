@@ -29,19 +29,13 @@ When transpiled, it takes the vars and outputs normal css with the variables val
 
 ```css
 
-$myFont: Helvetica, sans-serif;
-$myColor: red;
-$myFontSize: 18px;
-$myWidth: 680px;
-
 body {
-  font-family: $myFont;
-  font-size: $myFontSize;
-  color: $myColor;
+  font-family: Helvetica, sans-serif;
+  font-size: 18px;
+  color: red;
 }
 
 #container {
-  width: $myWidth;
+  width: 680px;
 }
-
 ```
