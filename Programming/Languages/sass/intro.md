@@ -197,3 +197,36 @@ selector {
   @include: mixin-name
 }
 ```
+
+so to use the important text mixin:
+
+```css
+.danger {
+  @include important-text;
+  background-color: green;
+}
+
+```
+
+This will result in the following css:
+
+```css
+.danger {
+  color: red;
+  font-size: 25px;
+  font-weight: bold;
+  border: 1px solid blue;
+  background-color: green;
+}
+```
+
+and you cann also include mixins in the declaration of other mixins
+
+```css
+
+@mixin special-text {
+  @include important-text;
+  @include link;
+  @include special-border;
+}
+```
