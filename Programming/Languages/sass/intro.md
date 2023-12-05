@@ -3,5 +3,5 @@
 Sass variable syntax: 
 
 ```sass
-$variablename = value
+$variablename: value;
 ```
