@@ -25,3 +25,23 @@ body {
   width: $myWidth;
 }
 ```
+When transpiled, it takes the vars and outputs normal css with the variables values placed in csss like: 
+
+```css
+
+$myFont: Helvetica, sans-serif;
+$myColor: red;
+$myFontSize: 18px;
+$myWidth: 680px;
+
+body {
+  font-family: $myFont;
+  font-size: $myFontSize;
+  color: $myColor;
+}
+
+#container {
+  width: $myWidth;
+}
+
+```
