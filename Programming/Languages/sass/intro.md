@@ -230,3 +230,93 @@ and you cann also include mixins in the declaration of other mixins
   @include special-border;
 }
 ```
+#### Passing a mixin as a variable
+
+You can pass variables to a mixin as follows:
+```scss
+@mixin bordered($color,$width) {
+  border: $width solid $color
+
+}
+// usge
+.myArticle {
+  @include bordered(blue, 1px) // call mixin with 2 values
+}
+
+```
+
+#### Default values for mixins:
+
+```scss
+@mixin bordered($color: blue, $width: 1px) { // this is how default values are used
+  border: $width solid $color;
+}
+
+```
+
+#### Vendor prefixes
+
+Mixins can be used for vendor prefixes as so: 
+
+```scss
+
+@mixin transform($prop) {
+   -webkit-transform: $property;
+  -ms-transform: $property;
+  transform: $property;
+}
+//usage: 
+.myBox {
+  @include transform(rotate(20deg));
+}
+```
+
+### @extends
+
+The following Sass example first creates a basic style for buttons (this style will be used for most buttons). Then, we create one style for a "Report" button and one style for a "Submit" button. Both "Report" and "Submit" button inherit all the CSS properties from the .button-basic class, through the @extend directive. In addition, they have their own colors defined:
+
+
+
+```scss
+.button-basic  {
+  border: none;
+  padding: 15px 30px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.button-report  {
+  @extend .button-basic;
+  background-color: red;
+}
+
+.button-submit  {
+  @extend .button-basic;
+  background-color: green;
+  color: white;
+}
+```
+
+After compilation: 
+
+```scss
+
+.button-basic, .button-report, .button-submit {
+  border: none;
+  padding: 15px 30px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.button-report  {
+  background-color: red;
+}
+
+.button-submit  {
+  background-color: green;
+  color: white;
+}
+
+```
