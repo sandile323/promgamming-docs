@@ -116,3 +116,49 @@ examples:
 @import "reset";
 
 ```
+
+Let's look at an example: Let's assume we have a reset file called "reset.scss", that looks like this:
+
+ ```scss
+
+html,
+body,
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+```
+
+and now we want to import the "reset.scss" file into another file called "standard.scss".
+
+Here is how we do it: It is normal to add the @import directive at the top of a file; this way its content will have a global scope:
+
+```scss
+@import "reset";
+
+body {
+  font-family: Helvetica, sans-serif;
+  font-size: 18px;
+  color: red;
+}
+
+```
+
+
+CSS output:
+
+```css
+html, body, ul, ol {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Helvetica, sans-serif;
+  font-size: 18px;
+  color: red;
+}
+
+``
