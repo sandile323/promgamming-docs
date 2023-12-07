@@ -16,3 +16,6 @@ let n = '1' + 1
 n = n -1
 console.log(n)// 10
 ```
+
+`==` also performs type coercion but it is best to use `===` as this will not introduce unexpected behaviour/
+
