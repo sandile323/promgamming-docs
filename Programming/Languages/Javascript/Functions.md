@@ -1,3 +1,28 @@
+### Example of function declarations vs expressions
+
+
+```js
+
+// Function Declaration
+
+function calcAge1(birthYear) {
+    return 2023 - birthYear;
+}
+
+const age1 = calcAge1(1997)
+
+// Function Expression
+
+const calcAge2 = function(birthYear) {
+    return 2023 - birth
+}
+
+const age2 = calcAge2(1998)
+
+console.log(age1, age2)
+
+```
+
 ### Function hoisting
 Consider the example below:
 
